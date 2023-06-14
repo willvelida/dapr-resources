@@ -1,0 +1,16 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: statestore
+spec:
+  type: state.azure.cosmosdb
+  version: v1
+  metadata:
+  - name: url
+    value: <cosmos-url>
+  - name: masterKey
+    value: "<primary-key>"
+  - name: database
+    value: bookstoredb
+  - name: collection
+    value: books

@@ -1,0 +1,15 @@
+{
+    "dotnet.defaultSolution": "src\\Bookstore.Api\\Bookstore.Api.sln",
+    "redisXplorer.config": {
+        "profiles": [
+            {
+                "name": "local",
+                "host": "localhost:6379",
+                "accessKey": "",
+                "filter": "*",
+                "port": "6379"
+            }
+        ],
+        "scanLimit": 200
+    }
+}
