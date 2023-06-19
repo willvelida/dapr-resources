@@ -30,7 +30,7 @@ namespace Bookstore.Api.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Exception thrown in {nameof(Get)}: {ex.Message}. {ex.InnerException}");
+                _logger.LogError($"Exception thrown in {nameof(Get)}: {ex.Message}");
                 return new StatusCodeResult(StatusCodes.Status500InternalServerError);
             }
         }

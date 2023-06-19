@@ -7,9 +7,9 @@ spec:
   version: v1
   metadata:
   - name: url
-    value: <cosmos-url>
+    value: <url>
   - name: masterKey
-    value: "<primary-key>"
+    value: ""
   - name: database
     value: bookstoredb
   - name: collection
