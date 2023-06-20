@@ -1,6 +1,5 @@
 ﻿using Dapr.Client;
 using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
 
 namespace SayHello.Api.Controllers
 {
@@ -18,19 +17,11 @@ namespace SayHello.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post()
+        public IActionResult Post()
         {
-            try
-            {
-                _logger.LogInformation("Hello Dapr Cron Job!");
+            _logger.LogInformation($"Hello Dapr Cron Job! The time is {DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss")}");
 
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Exception thrown in {nameof(Post)}: {ex.Message}");
-                throw;
-            }
+            return Ok();
         }
     }
 }
