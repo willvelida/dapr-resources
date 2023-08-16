@@ -4,14 +4,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Bookshop.Publisher.Controllers
 {
-    [Route("api/orderpublisher")]
+    [Route("api/orders")]
     [ApiController]
     public class OrderPublisherController : ControllerBase
     {
         private readonly DaprClient _daprClient;
-        private readonly ILogger _logger;
+        private readonly ILogger<OrderPublisherController> _logger;
 
-        public OrderPublisherController(DaprClient daprClient, ILogger logger)
+        public OrderPublisherController(DaprClient daprClient, ILogger<OrderPublisherController> logger)
         {
             _daprClient = daprClient;
             _logger = logger;
@@ -24,9 +24,9 @@ namespace Bookshop.Publisher.Controllers
             {
                 _logger.LogInformation($"Publishing order ID {order.OrderId}");
 
-                await _daprClient.PublishEventAsync("dapr-pubsub-servicebus", "", order);
+                await _daprClient.PublishEventAsync("dapr-pubsub", "orderstopic", order);
 
-                return Created($"api/orderpublisher/{order.OrderId}", order);
+                return Ok(order);
             }
 
             return BadRequest();

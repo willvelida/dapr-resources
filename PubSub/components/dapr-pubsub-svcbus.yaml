@@ -1,12 +1,12 @@
 apiVersion: dapr.io/v1alpha1
 kind: Component
 metadata:
-  name: dapr-pubsub-servicebus
+  name: dapr-pubsub
 spec:
   type: pubsub.azure.servicebus
   version: v1
   metadata:
     - name: connectionString
       value: ""
-    - name: consumerID
-      value: ""
+    - name:  consumerID
+      value: "order-processor-subscription"

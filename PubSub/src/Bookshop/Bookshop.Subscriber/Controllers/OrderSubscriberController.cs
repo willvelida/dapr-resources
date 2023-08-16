@@ -3,23 +3,28 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Bookshop.Subscriber.Controllers
 {
-    [Route("api/ordersubscriber")]
+    [Route("api/orders")]
     [ApiController]
     public class OrderSubscriberController : ControllerBase
     {
-        private readonly ILogger _logger;
+        private readonly ILogger<OrderSubscriberController> _logger;
 
-        public OrderSubscriberController(ILogger logger)
+        public OrderSubscriberController(ILogger<OrderSubscriberController> logger)
         {
             _logger = logger;
         }
 
-        [Dapr.Topic("dapr-pubsub-service", "orderreceivedtopic")]
-        public async Task<IActionResult> OrderReceived([FromBody] Order order)
+        [Dapr.Topic("dapr-pubsub", "orderstopic")]
+        [HttpPost("orderreceived")]
+        public IActionResult OrderReceived(Order order)
         {
-            _logger.LogInformation($"Receiving order ID: {order.OrderId}");
+            if (order is not null)
+            {
+                _logger.LogInformation($"Received Order ID: {order.OrderId}: {order.Title} - {order.Author} - {order.Price}");
+                return Ok();
+            }
 
-            return Ok(order);
+            return BadRequest();
         }
     }
 }
